@@ -1,11 +1,15 @@
 #8/10/18 scraping moscow apartment rentals using Beautiful Soup 
+
+#import libraries 
 import requests 
 from bs4 import BeautifulSoup
 import json
 from lxml import html  
 import argparse
 from urllib.parse import urljoin
+import sys
 
+#web-link 
 page_link="https://real-estate-moscow.com/en/flat-rent/rooms/1/valute/usd"
 
 #fetch the url
@@ -17,15 +21,12 @@ rentals=page_content.find_all('div',{'class':'object-info'})
 
 #1. rental prices
 prices=page_content.find_all('span',{'class':'object-price'})
-
-import sys
 orig_stdout = sys.stdout
 f=open('price_out.txt','w')
 sys.stdout=f
 
 for i in prices:
     print(i.string)
-
 sys.stdout=orig_stdout
 f.close() 
 
@@ -38,7 +39,6 @@ sys.stdout=f
 
 for i in rooms:
     print(i.string)
-
 sys.stdout=orig_stdout
 f.close() 
 
@@ -51,7 +51,5 @@ sys.stdout=f
 
 for i in area:
     print(i.string)
-
 sys.stdout=orig_stdout
 f.close() 
-
